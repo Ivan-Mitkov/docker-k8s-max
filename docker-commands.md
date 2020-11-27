@@ -15,6 +15,26 @@ docker rm $(docker ps -a -q)
 
 EXPOSE 80 in the Dockerfile in the end is optional. It documents that a process in the container will expose this port. But you still need to then actually expose the port with -p when running docker run. So technically, -p is the only required part when it comes to listening on a port. Still, it is a best practice to also add EXPOSE in the Dockerfile to document this behavior.
 
+##### atached mode
+
 docker run -p 3000:80 3ceb8a349ede
 
+show console log
 
+#### attach again
+
+docker attach f1c9277959729c3ffc29195aa957381f8ec9e142a6f802220ba8d5d10e251b8d
+
+#### detached mode
+
+docker start [name]
+
+##### detached again with -d
+
+docker run -p 4000:80 -d 2a8ea1e64332
+
+don't show anything on the terminal
+
+### Show logs
+
+docker logs -f [name]
