@@ -50,3 +50,16 @@ anonymous volume are mapped with some folder in local machine but we don't have 
 ##### if there is clashes between volumes the longer path, the more specific map in container override the less specific
 
 we can create extra volume anonymous volume if there is clash
+
+#### using nodemon
+
+for windows
+add nodemon as dependancy
+
+add "start": "nodemon -L server.js" in package.json
+
+rebuild the image
+run container
+
+for logs use
+docker logs [name of the container]
