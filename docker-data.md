@@ -28,11 +28,17 @@ create second volume with absolute path ro the folder which we want docker to us
 in docker settings parent folder must be included in shared folders
 in Windows it's included by default
 
-docker run -d -p 3000:80 --rm --name feedback -v feedback:/app/feedback -v "/$(pwd):/app" -v app/node_modules feedback-node:volumes
+##### this code is working
 
-docker run -d -p 3000:80 --rm --name feedback -v feedback:/app/feedback -v "C:/Us
-ers/Ivan/Documents/docker_k8s_max/data-volumes-01-starting-setup/:/app" -v app/
-node_modules feedback-node:volumes
+docker run -d -p 3000:80 --rm --name feedback -v feedback:/app/feedback -v "$(pwd -W):/app" -v app/node_modules feedback-node:volumes
+
+##### this code is not working pwd wrong path
+
+docker run -d -p 3000:80 --rm --name feedback -v feedback:/app/feedback -v "$(pwd):/app" -v app/node_modules feedback-node:volumes
+
+##### this code is working
+
+docker run -d -p 3000:80 --rm --name feedback -v feedback:/app/feedback -v "C:/Users/Ivan/Documents/docker_k8s_max/data-volumes-01-starting-setup/:/app" -v app/node_modules feedback-node:volumes
 
 docker run [detached] [map port 3000 to 80] [remove when stoped] [container with name feedback] [create volume named feedback in our app map it with app/feedback in docker] [create second volume as bind mount [get absolute path]:[map it with folder in docker container] ] [image name]
 
@@ -44,5 +50,3 @@ anonymous volume are mapped with some folder in local machine but we don't have 
 ##### if there is clashes between volumes the longer path, the more specific map in container override the less specific
 
 we can create extra volume anonymous volume if there is clash
-
-
