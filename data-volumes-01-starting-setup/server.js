@@ -46,4 +46,5 @@ app.post("/create", async (req, res) => {
   });
 });
 
-app.listen(80);
+const PORT =process.env.PORT||80
+app.listen(PORT,()=>console.log(`App running on port: ${PORT}`));
