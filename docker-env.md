@@ -43,3 +43,13 @@ Instead, go for a separate environment variables file which is then only used at
 Otherwise, the values are "baked into the image" and everyone can read these values via:
 
 docker history <image>.
+
+### Build arguments
+
+docker build -t feedback-node:dev --build-arg DEFAULT_PORT=8000 .
+
+--buil-arg [name]=[value]
+
+docker run -d -p 3000 --rm --name feedback -v feedback:/app/feedback -v "$(pw
+d -W):/app" -v app/node_modules feedback-node:dev
+
