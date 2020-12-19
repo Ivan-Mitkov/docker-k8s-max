@@ -31,3 +31,34 @@ docker build -t frontend-img .
 ##### need to be run in interactive mode -it
 
 docker run --name frontend-con --rm -d -p 3000:3000 -it frontend-img
+
+## Connecting with network
+
+#### create network called goals
+
+docker network create goals
+
+##### run mongo container without port exposing
+
+docker run --name mongodb --rm -d --network goals mongo
+
+##### change address connected to mongo in backend
+
+mongodb://mongodb:27017/course-goals
+
+##### react is in the browser so connection is to localhost not backend-con and is not connected to the network
+
+add proxy in package.json
+
+"proxy": "http://localhost:3000"
+
+change backend routes to /goals
+
+
+##### run frontend and backend containers
+
+###### -p 80:80 is for onnection with react
+
+docker run --name backend-con --rm -d --network goals -p 80:80 backend
+
+docker run --name frontend-con --rm -p 3000:3000 -it frontend
