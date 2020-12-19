@@ -1,0 +1,48 @@
+version: "3.8"
+services: 
+  mongodb:
+    image: 'mongo'
+    volumes: 
+      - data:/data/db
+    # environment: 
+    #   MONGO_INITDB_ROOT_USERNAME: mongouser 
+    #   # - MONGO_INITDB_ROOT_USERNAME=mongouser- this works
+    #   MONGO_INITDB_ROOT_PASSWORD: secret
+    env_file: 
+      - ./env/mongo.env
+  backend-con:
+  # build image with build
+    build: ./backend
+    # if docker file has different name then Dockerfile
+    # build: 
+    #   context: ./backend
+    #   dockerfile: Dockerfile-dev
+    #   args:
+    #     some-args: 1
+    ports: 
+      - '80:80'
+    volumes: 
+      - logs:/app/logs
+      #bind mount here is with relative to docker-compose path
+      - ./backend:/app
+      #anonymous volume
+      - /app/node_modules
+    env_file: 
+      - ./env/backend.env
+    depends_on: 
+      - mongodb
+  frontend-con:
+    build: ./frontend
+    ports: 
+      - '3000:3000'
+    volumes:          
+          #bind mount here is with relative to docker-compose path
+      - ./frontend/src:/app/src        
+    stdin_open: true
+    tty: true
+    depends_on: 
+      - backend-con
+#list only named volumes
+volumes: 
+  data:
+  logs:
