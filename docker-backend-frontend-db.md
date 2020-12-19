@@ -54,11 +54,39 @@ add proxy in package.json
 
 change backend routes to /goals
 
-
 ##### run frontend and backend containers
 
 ###### -p 80:80 is for onnection with react
 
-docker run --name backend-con --rm -d --network goals -p 80:80 backend
+docker run --name backend-con -d --rm --network goals -p 80:80 backend
 
 docker run --name frontend-con --rm -p 3000:3000 -it frontend
+
+## Add data persistence
+
+https://hub.docker.com/_/mongo
+
+#### add named volume
+
+docker run --name mongodb -d --rm -v data:/data/db --network goals mongo
+
+#### add env for user and password
+
+docker run --name mongodb -d --rm -v data:/data/db -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=secret --network goals mongo
+
+#### change connection string in backend to add user and password
+
+https://docs.mongodb.com/manual/reference/connection-string/
+mongodb://mongoadmin:secret@mongodb:27017/course-goals?authSource=admin
+
+#### if there are volumes which are created before auth must be removed or auth error occures
+
+docker volume prune
+
+### build backend image and run the container
+
+docker build -t backend .
+
+docker run --name backend-con -d --rm --network goals -p 80:80 backend
+
+

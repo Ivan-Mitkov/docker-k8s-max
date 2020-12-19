@@ -21,7 +21,6 @@ function App() {
         if (!response.ok) {
           throw new Error(resData.message || "Fetching the goals failed.");
         }
-
         setLoadedGoals(resData.goals);
       } catch (err) {
         setError(
