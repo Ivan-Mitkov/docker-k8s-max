@@ -47,7 +47,7 @@ app.get("/goals", async (req, res) => {
 app.post("/goals", async (req, res) => {
   console.log("TRYING TO STORE GOAL");
   const goalText = req.body.text;
-  
+
   if (!goalText || goalText.trim().length === 0) {
     console.log("INVALID INPUT - NO TEXT");
     return res.status(422).json({ message: "Invalid goal text." });
@@ -84,7 +84,7 @@ app.delete("/goals/:id", async (req, res) => {
 });
 
 mongoose.connect(
-  "mongodb://mongoadmin:secret@mongodb:27017/course-goals?authSource=admin",
+  `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@mongodb:27017/course-goals?authSource=admin`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
