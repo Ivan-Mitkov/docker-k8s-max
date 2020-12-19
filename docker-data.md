@@ -51,7 +51,7 @@ anonymous volume are mapped with some folder in local machine but we don't have 
 
 we can create extra volume anonymous volume if there is clash
 
--v /app/node_module tell docker to get node modules from image and not from bind mount, /app/node_modules is more specific than /app
+-v /app/node_modules tell docker to get node modules from image and not from bind mount, /app/node_modules is more specific than /app
 
 #### using nodemon
 

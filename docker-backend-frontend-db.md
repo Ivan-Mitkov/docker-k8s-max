@@ -88,5 +88,8 @@ docker volume prune
 docker build -t backend .
 
 docker run --name backend-con -d --rm --network goals -p 80:80 backend
+docker run --name backend-con --rm --network goals -p 80:80 backend
 
+### run backemd container with live update - bind mount and named volumes stroring files, existing node_modules in container should not be overwritten by non existing node_modules in host code
 
+docker run --name backend-con --rm -v app/node_modules -v "$(pwd -W):/app:ro" -v logs:/app/logs --network goals -p 80:80 backend
