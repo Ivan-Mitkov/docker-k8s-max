@@ -6,3 +6,5 @@ WORKDIR /var/www/html
 
 RUN docker-php-ext-install pdo pdo_mysql
 # no command so it will run the default base image command
+
+RUN chown -R www-data:www-data /var/www/html
