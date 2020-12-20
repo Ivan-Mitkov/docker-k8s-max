@@ -1,0 +1,8 @@
+version: "3.8"
+services: 
+  server:
+  php:
+  mysql:
+  composer:
+  artisan:
+  npm:
