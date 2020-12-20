@@ -9,4 +9,4 @@ composer create-project laravel/laravel
 docker-compose run --rm composer create-project laravel/laravel .
 
 ### run laravel app
-docker-compose up 
+docker-compose up -d server php mysql
